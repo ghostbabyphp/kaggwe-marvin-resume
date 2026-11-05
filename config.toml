@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://kaggwemarvinvictor.me"
+base_url = "https://ghostbabyphp.github.io/kaggwe-marvin-resume"
 title = "Kaggwe Marvin Victor: Notes"
 description = "Notes, tutorials and projects by Kaggwe Marvin Victor, a freelance developer in Kampala, Uganda, writing about MikroTik RouterOS, Linux on Windows and building for the web."
 default_language = "en"
