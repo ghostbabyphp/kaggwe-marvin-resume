@@ -573,3 +573,98 @@ pre code {
     box-shadow: none;
   }
 }
+
+/* ==========================================================================
+   Stickman cursor (stickman.js)
+   This block is the only place the stickman's look is decided. Each --sm-*
+   token points at one of your tokens above, so changing a token (or switching
+   data-theme) restyles the stickman too. stickman.js re-reads them on change.
+   ========================================================================== */
+:root {
+  --sm-scale: 0.5;                    /* character size; 1 is roughly 70px tall */
+  --sm-border: var(--border-width);   /* outline + bubble border */
+  --sm-offset: var(--offset);         /* hard-shadow offset */
+  --sm-ink: var(--text-primary);      /* limbs */
+  --sm-outline: var(--border-color);  /* outline around limbs, bubbles, beam */
+  --sm-skin: var(--bg-card);          /* head fill */
+  --sm-accent: var(--accent);         /* aura, hair, loading fill, power-up bubble */
+  --sm-on-accent: var(--on-accent);   /* text on accent */
+  --sm-shadow: var(--shadow-color);   /* hard shadows, dust, speed lines */
+  --sm-bubble-bg: var(--bg-card);
+  --sm-bubble-ink: var(--text-primary);
+  --sm-danger: #c4503f;               /* cape, boss, Spider-Man suit; muted to sit with amber */
+  --sm-beam: #7fd6e0;                 /* Kamehameha, sparks */
+  --sm-font: "Syne", "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+/* Native cursor is hidden only after stickman.js starts, so it never vanishes
+   without a replacement. !important beats .btn { cursor: pointer }. */
+html.sm-on,
+html.sm-on *,
+html.sm-on *::before,
+html.sm-on *::after {
+  cursor: none !important;
+}
+
+#sm-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2147483647;
+}
+
+@media print {
+  #sm-canvas {
+    display: none;
+  }
+}
+
+/* Boss-fight buttons: the button is the loading bar. The clipped top label sits
+   on the amber fill (dark text), the lower label sits on the card (light text). */
+[data-sm-armed] {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.sm-lbl {
+  display: block;
+  position: relative;
+}
+
+.sm-hp {
+  position: absolute;
+  inset: 0;
+  width: var(--sm-p, 0%);
+  overflow: hidden;
+  background: var(--accent);
+  color: var(--on-accent);
+  pointer-events: none;
+}
+
+.sm-hp .sm-lbl {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--sm-w, 100%);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+/* The shared amber hover would hide the amber fill, so armed buttons keep their resting colour */
+.btn[data-sm-armed]:hover {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.btn-strong[data-sm-armed]:hover {
+  background: var(--text-primary);
+  color: var(--bg-base);
+}
