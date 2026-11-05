@@ -131,7 +131,7 @@
             try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
         });
     </script>
-    <script src="static/js/stickman.js'></script>
+    <script src="{{ get_url(path='js/stickman.js', cachebust=true) }}" defer></script>
     {% block scripts %}{% endblock scripts %}
 </body>
 
